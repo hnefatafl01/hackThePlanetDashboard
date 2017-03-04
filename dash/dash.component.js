@@ -1,19 +1,18 @@
 (function() {
-  'use strict';
+    'use strict';
 
-  angular.module("app")
-    .component("dash", {
-      controller: dashCtrl ,
-      templateUrl: 'dash.html'
-    })
+    angular.module("app")
+        .component("dash", {
+            controller,
+            templateUrl: 'dash/dash.html'
+        })
 
-  dashCtrl.$inject = ['$http','$stateParams','$state']
+    function controller() {
+        const vm = this;
 
-  function dashCtrl($http, $stateParams, $state) {
-    const vm = this;
+        vm.$onInit = function() {
+            console.log('sdfgh');
+        };
 
-    vm.$onInit = function() {
-
-    };
-  }
+    }
 })();
