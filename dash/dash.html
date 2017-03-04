@@ -1,4 +1,4 @@
-<div ng-click="$ctrl.change_rainbow()"> 
+<div ng-click="$ctrl.change_rainbow()">
 
   <header id="header" class="corners">
     <div id="date">{{view.date}}</div>
@@ -14,7 +14,8 @@
     <div>Air Particles {{view.airParticlesRead}}</div>
     <div>Temperature: {{view.temp}}</div>
   </footer>
-
+  <input type='text' ng-model=view.search ></input>
+  <button ng-click="$ctrl.search()"></button>
 
 
 </div>

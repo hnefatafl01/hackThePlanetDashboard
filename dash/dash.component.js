@@ -76,16 +76,25 @@
         }
 
         function locationSearch() {
-            let local = vm.searchTerm;
-            $http.get("https://maps.googleapis.com/maps/api/geocode/json?address=" + local + `&key=${API_KEY}`)
+          console.log('here');
+            let local = $scope.view.search;
+            $http.get("https://maps.googleapis.com/maps/api/geocode/json?address=" + local + `&key=AIzaSyAFSPs5znb5ggZ7ZyajBCJMdBiKEXV6UG0`)
                 .then(function(res) {
                   $scope.view.location = res.data.results[0].geometry.location
+                  $http.get(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${$scope.view.location.lat},${$scope.view.location.lng}`+ "&key=AIzaSyDK9X5OV-tZJoXLGT6w1kvx3m-iviDDXiI")
+                      .then(function(res) {
+                        console.log(res);
+                        $scope.view.locationName=res.data.results[2].formatted_address
+
+                    })
                   airPollution($scope.view.location )
                   airTemp($scope.view.location )
 
                 })
         }
-
+        vm.search=function(){
+          locationSearch()
+        }
         function airPollution(local){
           $http.get("https://api.planetos.com/v1/datasets/noaa_aqfs_pm25_bc_conus/point?origin=dataset-details&lat=" + local.lat + `&apikey=${API_KEY}&lon=` + local.lng + "&_ga=1.196584740.908249478.1488639799")
           .then(function(res){
