@@ -11,14 +11,22 @@
     controller.$inject = ['$http', '$scope'];
 
     function controller($http, $scope) {
-        const dat = this
+        const vm = this
         console.log($scope);
         $scope.view={}
+<<<<<<< HEAD
         dat.$onInit = onInit;
         dat.gps = gps;
         dat.locationSearch = locationSearch;
         dat.airPollution = airPollution;
         dat.airTemp = airTemp;
+=======
+        vm.$onInit = onInit;
+        vm.gps = gps;
+        vm.locationSearch = locationSearch;
+        vm.airPollution = airPollution
+        vm.airTemp = airTemp
+>>>>>>> a7f4f34639f42e38f4b939562184abdc83b2dba6
 
         function onInit() {
 
@@ -34,7 +42,7 @@
             function success(pos) {
                 var crd = pos.coords;
 
-                console.log(dat);
+                console.log(vm);
                 $scope.view.location = {
                     lat: crd.latitude,
                     lng: crd.longitude
@@ -52,7 +60,7 @@
         }
 
         function locationSearch() {
-            let local = dat.searchTerm;
+            let local = vm.searchTerm;
             $http.get("https://maps.googleapis.com/maps/api/geocode/json?address=" + local + "&key=AIzaSyDK9X5OV-tZJoXLGT6w1kvx3m-iviDDXiI")
                 .then(function(res) {
                   $scope.view.location = res.data.results[0].geometry.location
