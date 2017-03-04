@@ -8,7 +8,7 @@
         })
 
     function controller($scope,$http, ApiRequests) {
-        const API_KEY = '35350abd8e8647e68905ac17226c373b';
+        const API_KEY = 'c8ecc1f10bcf4911b86482b3d5b2b1a9';
         const vm = this;
         console.log($scope);
         $scope.view = {}
@@ -99,6 +99,7 @@
           $http.get("https://api.planetos.com/v1/datasets/noaa_aqfs_pm25_bc_conus/point?origin=dataset-details&lat=" + local.lat + `&apikey=${API_KEY}&lon=` + local.lng + "&_ga=1.196584740.908249478.1488639799")
           .then(function(res){
             $scope.view.airParticles = res.data.entries[0].data
+            console.log(res.data.entries[0].data);
             $scope.view.airParticlesRead=  Number($scope.view.airParticles.PMTF_1sigmalevel.toFixed(2))
             setTimeout(vm.change_rainbow(), 10000);
 
