@@ -8,6 +8,7 @@
         })
 
     function controller($scope,$http, ApiRequests) {
+        const API_KEY = 'e789dc8cee4442cfa5627a546b2fe772';
         const vm = this;
         console.log($scope);
         $scope.view = {}
@@ -74,7 +75,7 @@
 
         function locationSearch() {
             let local = vm.searchTerm;
-            $http.get("https://maps.googleapis.com/maps/api/geocode/json?address=" + local + "&key=AIzaSyDK9X5OV-tZJoXLGT6w1kvx3m-iviDDXiI")
+            $http.get("https://maps.googleapis.com/maps/api/geocode/json?address=" + local + `&key=${API_KEY}`)
                 .then(function(res) {
                   $scope.view.location = res.data.results[0].geometry.location
                   airPollution($scope.view.location )
@@ -84,7 +85,7 @@
         }
 
         function airPollution(local){
-          $http.get("https://api.planetos.com/v1/datasets/noaa_aqfs_pm25_bc_conus/point?origin=dataset-details&lat="+local.lat+"&apikey=df2428181b194321977a4019aa15ecaf&lon="+local.lng+"&_ga=1.196584740.908249478.1488639799")
+          $http.get("https://api.planetos.com/v1/datasets/noaa_aqfs_pm25_bc_conus/point?origin=dataset-details&lat=" + local.lat + `&apikey=${API_KEY}&lon=` + local.lng + "&_ga=1.196584740.908249478.1488639799")
           .then(function(res){
             $scope.view.airParticles = res.data.entries[0].data
             $scope.view.airParticlesRead=   $scope.view.airParticles.PMTF_1sigmalevel.toFixed(2)
@@ -92,7 +93,7 @@
         }
 
         function airTemp(local){
-          $http.get("https://api.planetos.com/v1/datasets/noaa_gfs_global_sflux_0.12d/point?origin=dataset-details&lat="+local.lat+"&apikey=df2428181b194321977a4019aa15ecaf&lon="+local.lng+"&_ga=1.229213460.908249478.1488639799")
+          $http.get("https://api.planetos.com/v1/datasets/noaa_gfs_global_sflux_0.12d/point?origin=dataset-details&lat="+ local.lat + `&apikey=${API_KEY}&lon=` + local.lng + "&_ga=1.229213460.908249478.1488639799")
           .then(function(res){
             let tempK =res.data.entries[5].data.Temperature_surface
             let temp = (9/5)*(tempK-273)+32
