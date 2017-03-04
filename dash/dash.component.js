@@ -93,14 +93,20 @@
         }
 
         function airTemp(local){
-          $http.get("https://api.planetos.com/v1/datasets/noaa_gfs_global_sflux_0.12d/point?origin=dataset-details&lat="+ local.lat + `&apikey=${API_KEY}&lon=` + local.lng + "&_ga=1.229213460.908249478.1488639799")
+          $http.get("https://api.wunderground.com/api/6cd1247caa587deb/conditions/q/"+local.lat+","+local.lng+".json")
           .then(function(res){
-            let tempK =res.data.entries[5].data.Temperature_surface
-            let temp = (9/5)*(tempK-273)+32
-            $scope.view.tempSurface={TempSurface:temp}
-            $scope.view.tempSurface.readable=Math.round($scope.view.tempSurface.TempSurface);
-            console.log($scope);
-          })
+            let weather = res.data.current_observation
+            console.log(weather)
+            $scope.view.uv = weather.UV
+            $scope.view.temp = weather.feelslike_f
+            $scope.view.wind = weather.wind_mph
+            $scope.view.wind_direction = weather.wind_dir
+            $scope.view.weather = weather.weather
+            $scope.view.image = weather.icon_url
+            $scope.view.forecast = weather.forecast_url
+
+            })
+
         }
 
     }
