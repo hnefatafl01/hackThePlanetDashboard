@@ -10,11 +10,11 @@
 
     $stateProvider
       .state({
-        name: 'postList',
+        name: 'dash',
         url: '/',
-        component: 'post'
+        component: 'dash'
       })
-    
+
   }
 
 }());
