@@ -2,6 +2,7 @@
 
   <header id="header" class="corners">
     <div id="date">{{view.date}}</div>
+    <img src="{{view.image}}"/>
     <div id="location">{{view.locationName}}</div>
   </header>
   <section id="weather" style="background-image: radial-gradient(farthest-corner at 10rem 10rem, rgba({{view.rainbow[0].r}}, {{view.rainbow[0].g}}, {{view.rainbow[0].b}}, {{view.rainbow[0].a}}) {{view.rainbow[0].percentage}}, rgba({{view.rainbow[1].r}}, {{view.rainbow[1].g}}, {{view.rainbow[1].b}}, {{view.rainbow[1].a}}) {{view.rainbow[1].percentage}}, rgba({{view.rainbow[2].r}}, {{view.rainbow[2].g}}, {{view.rainbow[2].b}}, {{view.rainbow[2].a}}) {{view.rainbow[2].percentage}}, rgba({{view.rainbow[3].r}}, {{view.rainbow[3].g}}, {{view.rainbow[3].b}}, {{view.rainbow[3].a}}) {{view.rainbow[3].percentage}}, rgba({{view.rainbow[4].r}}, {{view.rainbow[4].g}}, {{view.rainbow[4].b}}, {{view.rainbow[4].a}}) {{view.rainbow[4].percentage}}), url(img/background.jpg);">
@@ -9,8 +10,16 @@
   <!-- <section id="weather" style="background-image: radial-gradient(farthest-corner at 10rem 10rem, rgba(69, 7, 204, 0.94) 0%, rgba(104, 82, 153, 0.94) 10%, rgba(34, 84, 255, 0.94) 30%, ), url(img/background.jpg);"> -->
   </section>
   <footer class="corners">
-    <div>Air Particles {{view.airParticlesRead}}</div>
-    <div>Temperature: {{view.temp}}</div>
+    <div class="air">
+      <div>Air Particles {{view.airParticlesRead}}</div>
+      <div>Temperature: {{view.temp}}</div>
+      <div>UV {{view.uv}}</div>  
+    </div>
+
+    <div class="wind">
+      <div>Wind: {{view.wind}}</div>
+      <div>Wind Direction: {{view.wind_direction}}</div>
+    </div>
   </footer>
 
 
