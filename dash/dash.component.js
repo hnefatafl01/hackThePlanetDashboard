@@ -132,7 +132,7 @@
             color.g = 40;
             color.b =
             Math.floor(Math.random() * 100);
-            color.a = $scope.view.airParticlesRead / 10;
+            color.a = $scope.view.airParticlesRead / 20;
             color.percentage = index > 0 ?
             Math.random() * (100 - parseFloat(rainbow[index - 1].percentage)) + parseFloat(rainbow[index - 1].percentage) + "%" :
             Math.random() * 50 + "%";
