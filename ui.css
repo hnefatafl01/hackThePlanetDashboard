@@ -4,5 +4,65 @@
   right: 0;
   bottom: 0;
   left: 0;
-  background-image: radial-gradient(farthest-corner at 10rem 10rem, rgba(28, 49, 245, 0.94) 0%, rgba(28, 8, 245, 0.94) 10%, rgba(107, 215, 227, 0.94) 100%), url(img/background.jpg);
+  z-index: -1;
+  background-size: cover;
+}
+#date {
+  order: -1;
+}
+
+#location {
+  align-self: center;
+  order: 1;
+  margin-right: 10vw;
+}
+
+body {
+  display: flex;
+}
+.corners {
+  padding: 3em;
+  /*justify-content: space-between;*/
+  flex-direction: row;
+  font-family: 'Roboto', sans-serif;
+  color: #fff;
+}
+
+#header {
+  width: 100vw;
+  display: flex;
+  justify-content: space-between;
+}
+
+footer {
+   position:fixed;
+   left:0px;
+   bottom:0px;
+   height:30px;
+   width:90vw;
+  display: flex;
+  justify-content: space-between;
+}
+
+#wind {
+  align-self: center;
+  order: 1;
+}
+
+#air {
+  order: -1;
+  margin-right: 20vw;
+}
+
+#input {
+  width: 100vw;
+  justify-content: center;
+  align-items: center;
+  margin-left: 78vw;
+}
+
+#box {
+  width: 20vw;
+  align-self: flex-end;
+  order:-1;
 }

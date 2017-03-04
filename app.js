@@ -1,0 +1,110 @@
+(function() {
+
+    'use strict';
+
+    angular.module('app', [])
+        .component('content', {
+            templateUrl: '/views/content.html',
+            controller: controller
+        })
+
+    controller.$inject = ['$http', '$scope'];
+
+    function controller($http, $scope) {
+        const vm = this
+        console.log($scope);
+        $scope.view={}
+<<<<<<< HEAD
+        dat.$onInit = onInit;
+        dat.gps = gps;
+        dat.locationSearch = locationSearch;
+        dat.airPollution = airPollution;
+        dat.airTemp = airTemp;
+=======
+        vm.$onInit = onInit;
+        vm.gps = gps;
+        vm.locationSearch = locationSearch;
+        vm.airPollution = airPollution
+        vm.airTemp = airTemp
+>>>>>>> a7f4f34639f42e38f4b939562184abdc83b2dba6
+
+        function onInit() {
+
+        }
+
+        function gps() {
+            var options = {
+                enableHighAccuracy: false,
+                timeout: 5000,
+                maximumAge: 0
+            };
+
+            function success(pos) {
+                var crd = pos.coords;
+
+                console.log(vm);
+                $scope.view.location = {
+                    lat: crd.latitude,
+                    lng: crd.longitude
+                };
+                airPollution($scope.view.location )
+                airTemp($scope.view.location )
+                $scope.$apply()
+            };
+
+            function error(err) {
+                console.warn('ERROR(' + err.code + '): ' + err.message);
+            };
+
+            navigator.geolocation.getCurrentPosition(success, error, options)
+        }
+
+        function locationSearch() {
+            let local = vm.searchTerm;
+            $http.get("https://maps.googleapis.com/maps/api/geocode/json?address=" + local + "&key=AIzaSyDK9X5OV-tZJoXLGT6w1kvx3m-iviDDXiI")
+                .then(function(res) {
+                  $scope.view.location = res.data.results[0].geometry.location
+                  airPollution($scope.view.location )
+                  airTemp($scope.view.location )
+
+                })
+        }
+
+        function airPollution(local){
+          $http.get("https://api.planetos.com/v1/datasets/noaa_aqfs_pm25_bc_conus/point?origin=dataset-details&lat="+local.lat+"&apikey=97abc5a3bba147dca70b034cf008302f&lon="+local.lng+"&_ga=1.196584740.908249478.1488639799")
+          .then(function(res){
+            $scope.view.airParticles = res.data.entries[0].data
+          })
+        }
+
+        function airTemp(local){
+          // $http.get("https://api.planetos.com/v1/datasets/noaa_gfs_global_sflux_0.12d/point?origin=dataset-details&lat="+local.lat+"&apikey=97abc5a3bba147dca70b034cf008302f&lon="+local.lng+"&_ga=1.229213460.908249478.1488639799")
+          // .then(function(res){
+          //   let tempK =res.data.entries[5].data.Temperature_surface
+          //   let temp = (9/5)*(tempK-273)+32
+          //   $scope.view.tempSurface={TempSurface:temp}
+          //   let cloudCover = res.data.entries;
+          //   console.log(cloudCover)
+          // })
+
+          $http.get("https://api.wunderground.com/api/6cd1247caa587deb/conditions/q/"+local.lat+","+local.lng+".json")
+          .then(function(res){
+            let weather = res.data.current_observation
+            console.log(weather)
+            $scope.view.uv = weather.UV
+            $scope.view.temp = weather.feelslike_f
+            $scope.view.wind = weather.wind_mph
+            $scope.view.wind_direction = weather.wind_dir
+            $scope.view.weather = weather.weather
+            $scope.view.image = weather.icon_url
+            $scope.view.forecast = weather.forecast_url
+
+
+
+
+          })
+        }
+
+    }
+
+}());
