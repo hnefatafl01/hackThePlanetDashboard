@@ -52,3 +52,16 @@ footer {
   order: -1;
   margin-right: 20vw;
 }
+
+#input {
+  width: 100vw;
+  justify-content: center;
+  align-items: center;
+  margin-left: 78vw;
+}
+
+#box {
+  width: 20vw;
+  align-self: flex-end;
+  order:-1;
+}
