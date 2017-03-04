@@ -9,7 +9,22 @@
 <img class = "gps" src="/images/gps.png" alt="" ng-click = "$ctrl.gps()">
 <div>
 {{view.location}}
-{{view.airParticles}}
-{{view.tempSurface}}
+<br>
+{{view.airParticles}}<br>
+
+{{view.tempSurface}}<br>
+
+UV: {{view.uv}}<br>
+
+Temp: {{view.temp}}<br>
+
+Wind: {{view.wind}}<br>
+
+Wind Direction: {{view.wind_direction}}<br>
+
+Weather: {{view.weather}}<br>
+
+<img src="{{view.image}}" alt=""><br>
+<a href="{{view.forecast}}" target="_blank">Forecast</a><br>
 
 </div>
