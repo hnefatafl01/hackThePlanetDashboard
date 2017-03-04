@@ -31,6 +31,8 @@
             vm.temperature = (vm.kelvin + 459.67) * 5 / 9;
             var date=new Date();
             $scope.view.date=date.toDateString();
+            $scope.view.locationName='__________'
+            $scope.view.temp = '___'
 
         };
         $scope.view={}
@@ -88,7 +90,7 @@
           $http.get("https://api.planetos.com/v1/datasets/noaa_aqfs_pm25_bc_conus/point?origin=dataset-details&lat=" + local.lat + `&apikey=${API_KEY}&lon=` + local.lng + "&_ga=1.196584740.908249478.1488639799")
           .then(function(res){
             $scope.view.airParticles = res.data.entries[0].data
-            $scope.view.airParticlesRead=   $scope.view.airParticles.PMTF_1sigmalevel.toFixed(2)
+            $scope.view.airParticlesRead=  Number($scope.view.airParticles.PMTF_1sigmalevel.toFixed(2))
           })
         }
 
@@ -104,7 +106,7 @@
             $scope.view.weather = weather.weather
             $scope.view.image = weather.icon_url
             $scope.view.forecast = weather.forecast_url
-
+            console.log($scope.view);
             })
 
         }
