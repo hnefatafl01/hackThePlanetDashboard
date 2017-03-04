@@ -10,7 +10,7 @@
       .state({
         name: 'dash',
         url: '/',
-        component: 'dash'
+        component: 'dash/dash.component.js'
       })
 
   }
