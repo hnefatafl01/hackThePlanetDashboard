@@ -8,7 +8,7 @@
         })
 
     function controller($scope,$http, ApiRequests) {
-        const API_KEY = 'e789dc8cee4442cfa5627a546b2fe772';
+        const API_KEY = '35350abd8e8647e68905ac17226c373b';
         const vm = this;
         console.log($scope);
         $scope.view = {}
@@ -91,6 +91,8 @@
           .then(function(res){
             $scope.view.airParticles = res.data.entries[0].data
             $scope.view.airParticlesRead=  Number($scope.view.airParticles.PMTF_1sigmalevel.toFixed(2))
+            setTimeout(vm.change_rainbow(), 10000);
+
           })
         }
 
@@ -107,15 +109,17 @@
             $scope.view.image = weather.icon_url
             $scope.view.forecast = weather.forecast_url
             console.log($scope.view);
+
             })
 
             vm.abstract = "a.jpg";
             // vm.kelvin = 100;
             // vm.temperature = (vm.kelvin + 459.67) * 5 / 9;
-            $scope.view.temp = 78;
-            $scope.view.airParticlesRead = 4.68;
+            // $scope.view.temp = 78;
+            // $scope.view.airParticlesRead = 4.68;
         };
         vm.change_rainbow = () => {
+          console.log('called');
           $scope.view.rainbow.forEach((color, index, rainbow) => {
             color.r = $scope.view.temp < 125 ?
             Math.ceil($scope.view.temp / 125 * 255) :
