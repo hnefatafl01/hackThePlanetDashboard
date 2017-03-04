@@ -28,6 +28,9 @@
             vm.abstract = "background.jpg";
             vm.kelvin = 100;
             vm.temperature = (vm.kelvin + 459.67) * 5 / 9;
+            var date=new Date();
+            $scope.view.date=date.toDateString();
+
         };
         $scope.view={}
         vm.gps = gps;
@@ -54,6 +57,12 @@
                 airPollution($scope.view.location )
                 airTemp($scope.view.location )
                 $scope.$apply()
+                $http.get(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${$scope.view.location.lat},${$scope.view.location.lng}`+ "&key=AIzaSyDK9X5OV-tZJoXLGT6w1kvx3m-iviDDXiI")
+                    .then(function(res) {
+                      console.log(res);
+                      $scope.view.locationName=res.data.results[2].formatted_address
+
+                  })
             };
 
             function error(err) {
@@ -78,6 +87,7 @@
           $http.get("https://api.planetos.com/v1/datasets/noaa_aqfs_pm25_bc_conus/point?origin=dataset-details&lat="+local.lat+"&apikey=df2428181b194321977a4019aa15ecaf&lon="+local.lng+"&_ga=1.196584740.908249478.1488639799")
           .then(function(res){
             $scope.view.airParticles = res.data.entries[0].data
+            $scope.view.airParticlesRead=   $scope.view.airParticles.PMTF_1sigmalevel.toFixed(2)
           })
         }
 
@@ -87,6 +97,7 @@
             let tempK =res.data.entries[5].data.Temperature_surface
             let temp = (9/5)*(tempK-273)+32
             $scope.view.tempSurface={TempSurface:temp}
+            $scope.view.tempSurface.readable=Math.round($scope.view.tempSurface.TempSurface);
             console.log($scope);
           })
         }
