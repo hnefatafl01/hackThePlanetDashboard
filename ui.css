@@ -6,3 +6,39 @@
   left: 0;
   z-index: -1;
 }
+#date {
+  order: -1;
+}
+
+#location {
+  align-self: center;
+  order: 1;
+  margin-right: 10vw;
+}
+
+body {
+  display: flex;
+}
+
+#header {
+  width: 100vw;
+  display: flex;
+  justify-content: space-between;
+}
+
+footer {
+   position:fixed;
+   left:0px;
+   bottom:0px;
+   height:30px;
+   width:100%;
+
+}
+
+.corners {
+  padding: 3em;
+  /*justify-content: space-between;*/
+  flex-direction: row;
+  font-family: 'Roboto', sans-serif;
+  color: #fff;
+}
